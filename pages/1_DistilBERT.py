@@ -19,7 +19,7 @@ model_id = "SaiPavanKumarMeruga/"+model_checkpoint+"-lora-sarcasm-classification
 
 
 # load peft model from hub for inference
-config = PeftConfig.from_pretrained(model_id)
+config = PeftConfig.from_pretrained(model_id, config="https://huggingface.co/SaiPavanKumarMeruga/distilbert-base-uncased-lora-text-classification/blob/main/adapter_config.json")
 inference_model = AutoModelForSequenceClassification.from_pretrained(
     config.base_model_name_or_path, num_labels=2, id2label=id2label, label2id=label2id
 )

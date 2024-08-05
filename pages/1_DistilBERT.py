@@ -19,11 +19,11 @@ model_id = "SaiPavanKumarMeruga/"+model_checkpoint+"-lora-sarcasm-classification
 
 
 # load peft model from hub for inference
-config = PeftConfig.from_pretrained(model_id, config="https://huggingface.co/SaiPavanKumarMeruga/distilbert-base-uncased-lora-text-classification/blob/main/adapter_config.json")
+# config = PeftConfig.from_pretrained(model_id, config="https://huggingface.co/SaiPavanKumarMeruga/distilbert-base-uncased-lora-text-classification/blob/main/adapter_config.json")
 inference_model = AutoModelForSequenceClassification.from_pretrained(
-    config.base_model_name_or_path, num_labels=2, id2label=id2label, label2id=label2id
+    'distilbert-base-uncased', num_labels=2, id2label=id2label, label2id=label2id
 )
-tokenizer = AutoTokenizer.from_pretrained(config.base_model_name_or_path)
+tokenizer = AutoTokenizer.from_pretrained('distilbert-base-uncased')
 model = PeftModel.from_pretrained(inference_model, model_id)
 
 

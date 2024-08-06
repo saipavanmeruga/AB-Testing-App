@@ -5,7 +5,8 @@ import streamlit.components.v1 as components
 import torch
 from peft import PeftConfig, PeftModel
 from transformers import AutoTokenizer,AutoModelForSequenceClassification
-
+from huggingface_hub import notebook_login
+notebook_login()
 
 #define label maps
 id2label = {0:'NotSarcastic', 1: 'Sarcastic'}
@@ -16,14 +17,11 @@ st.write('Please wait for model to load')
 
 model_checkpoint = "roberta-base"
 model_id = "SaiPavanKumarMeruga/"+model_checkpoint+"-lora-sarcasm-classification"
-
-
-# load peft model from hub for inference
-# config = PeftConfig.from_pretrained(model_id, config="https://huggingface.co/SaiPavanKumarMeruga/roberta-base-lora-sarcasm-classification1/blob/main/adapter_config.json")
+config = PeftConfig.from_json_file('./adapter_config.json')
 inference_model = AutoModelForSequenceClassification.from_pretrained(
-    'roberta-base', num_labels=2, id2label=id2label, label2id=label2id
+    config.base_model_name_or_path, num_labels=2, id2label=id2label, label2id=label2id
 )
-tokenizer = AutoTokenizer.from_pretrained('roberta-base')
+tokenizer = AutoTokenizer.from_pretrained(config.base_model_name_or_path)
 model = PeftModel.from_pretrained(inference_model, model_id)
 
 

@@ -5,8 +5,8 @@ import streamlit.components.v1 as components
 import torch
 from peft import PeftConfig, PeftModel
 from transformers import AutoTokenizer,AutoModelForSequenceClassification
-from huggingface_hub import notebook_login
-notebook_login()
+# from huggingface_hub import notebook_login
+# notebook_login()
 
 #define label maps
 id2label = {0:'NotSarcastic', 1: 'Sarcastic'}

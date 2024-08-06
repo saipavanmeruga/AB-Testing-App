@@ -14,18 +14,16 @@ label2id = {'NotSarcastic':0, 'Sarcastic':1}
 
 st.write('# Model B: :sunglasses:')
 st.write('Please wait for model to load')
-
-model_checkpoint = "roberta-base"
-model_id = "SaiPavanKumarMeruga/"+model_checkpoint+"-lora-sarcasm-classification"
-config = PeftConfig.from_json_file('./adapter_config.json')
+# how to load peft model from hub for inference
+config = PeftConfig.from_json_file('../roberta-base-lora-text-classification/adapter_config.json')
 inference_model = AutoModelForSequenceClassification.from_pretrained(
-    config.base_model_name_or_path, num_labels=2, id2label=id2label, label2id=label2id
+    '../roberta-base-lora-text-classification/', num_labels=2, id2label=id2label, label2id=label2id
 )
-tokenizer = AutoTokenizer.from_pretrained(config.base_model_name_or_path)
-model = PeftModel.from_pretrained(inference_model, model_id)
+tokenizer = AutoTokenizer.from_pretrained('../roberta-base-lora-text-classification/')
+model = PeftModel.from_pretrained(inference_model, '../roberta-base-lora-text-classification/')
 
 
-placeholder_text = "Wow, what a great movie - complete waste of time."
+placeholder_text = "Flustered mathematician unable to recommend good number"
 text_input = st.text_input(
         "Enter some text for the model to classify as Sarcastic, Not Sarcastic 👇",
         placeholder=placeholder_text)

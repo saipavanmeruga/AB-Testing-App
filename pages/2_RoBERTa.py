@@ -15,12 +15,12 @@ label2id = {'NotSarcastic':0, 'Sarcastic':1}
 st.write('# Model B: :sunglasses:')
 st.write('Please wait for model to load')
 # how to load peft model from hub for inference
-config = PeftConfig.from_json_file('./roberta-base-lora-text-classification/adapter_config.json')
+config = PeftConfig.from_json_file('./pages/roberta-base-lora-text-classification/adapter_config.json')
 inference_model = AutoModelForSequenceClassification.from_pretrained(
-    './roberta-base-lora-text-classification/', num_labels=2, id2label=id2label, label2id=label2id
+    './pages/roberta-base-lora-text-classification/', num_labels=2, id2label=id2label, label2id=label2id
 )
-tokenizer = AutoTokenizer.from_pretrained('./roberta-base-lora-text-classification/')
-model = PeftModel.from_pretrained(inference_model, './roberta-base-lora-text-classification/')
+tokenizer = AutoTokenizer.from_pretrained('./pages/roberta-base-lora-text-classification/')
+model = PeftModel.from_pretrained(inference_model, './pages/roberta-base-lora-text-classification/')
 
 
 placeholder_text = "Flustered mathematician unable to recommend good number"

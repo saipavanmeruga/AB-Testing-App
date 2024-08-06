@@ -18,12 +18,12 @@ model_checkpoint = "distilbert-base-uncased"
 model_id = "SaiPavanKumarMeruga/"+model_checkpoint+"-lora-sarcasm-classification"
 
 # how to load peft model from hub for inference
-config = PeftConfig.from_json_file('../distilbert-base-uncased-lora-text-classification/adapter_config.json')
+config = PeftConfig.from_json_file('./distilbert-base-uncased-lora-text-classification/adapter_config.json')
 inference_model = AutoModelForSequenceClassification.from_pretrained(
-    '../distilbert-base-uncased-lora-text-classification/', num_labels=2, id2label=id2label, label2id=label2id
+    './distilbert-base-uncased-lora-text-classification/', num_labels=2, id2label=id2label, label2id=label2id
 )
-tokenizer = AutoTokenizer.from_pretrained('../distilbert-base-uncased-lora-text-classification/')
-model = PeftModel.from_pretrained(inference_model, '../distilbert-base-uncased-lora-text-classification/')
+tokenizer = AutoTokenizer.from_pretrained('./distilbert-base-uncased-lora-text-classification/')
+model = PeftModel.from_pretrained(inference_model, './distilbert-base-uncased-lora-text-classification/')
 
 
 placeholder_text = "Flustered mathematician unable to recommend good number"
